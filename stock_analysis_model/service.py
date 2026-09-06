@@ -49,10 +49,10 @@ def calculate_basic_statistics(data):
     average_daily_return = daily_returns.mean()*100
 
     return{
-        "current_price":current_price,
-        "starting_price":starting_price,
-        "highest_price":highest_price,
-        "lowest_price":lowest_price,
-        "total_return":total_return,
-        "average_daily_return":average_daily_return
+        "current_price":float(current_price),
+        "starting_price":float(starting_price),
+        "highest_price":float(highest_price),
+        "lowest_price":float(lowest_price),
+        "total_return":float(total_return),
+        "average_daily_return":float(average_daily_return)
     }

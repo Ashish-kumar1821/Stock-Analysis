@@ -41,6 +41,7 @@ def stock_data(request):
         return JsonResponse({
             "ticker" : ticker,
             "period" : period,
+            "statistics" : statistics,
             "data" : data.reset_index().to_dict(orient="records")
         })
     except Exception as e:
