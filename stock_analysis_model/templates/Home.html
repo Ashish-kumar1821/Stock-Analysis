@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockScope | Stock Analysis</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #0b0f14;
+            color: #ffffff;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            width: 100%;
+            height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            border-bottom: 1px solid #20262e;
+            background: #0b0f14;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #35d07f;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #a9b1bc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #35d07f;
+        }
+
+
+        /* =========================
+           HERO SECTION
+        ========================= */
+
+        .hero {
+            min-height: 520px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            font-size: 58px;
+            line-height: 1.1;
+            max-width: 850px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #35d07f;
+        }
+
+        .hero p {
+            max-width: 650px;
+
+            color: #9da6b2;
+
+            font-size: 17px;
+            line-height: 1.7;
+
+            margin-bottom: 40px;
+        }
+
+
+        /* =========================
+           SEARCH BOX
+        ========================= */
+
+        .search-container {
+            width: 100%;
+            max-width: 750px;
+
+            background: #121820;
+
+            border: 1px solid #29313b;
+            border-radius: 14px;
+
+            padding: 25px;
+
+            text-align: left;
+
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-container label {
+            display: block;
+
+            color: #c4cad2;
+
+            font-size: 14px;
+
+            margin-bottom: 10px;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .search-input {
+            flex: 1;
+
+            padding: 15px 18px;
+
+            background: #0b0f14;
+
+            border: 1px solid #303944;
+            border-radius: 8px;
+
+            color: white;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: #35d07f;
+        }
+
+        .search-button {
+            padding: 0 28px;
+
+            background: #35d07f;
+            color: #07100b;
+
+            border: none;
+            border-radius: 8px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background: #2cbd70;
+        }
+
+
+        /* =========================
+           DURATION
+        ========================= */
+
+        .duration-section {
+            margin-top: 20px;
+        }
+
+        .duration-section label {
+            margin-bottom: 10px;
+        }
+
+        .duration-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .duration-option {
+            padding: 9px 15px;
+
+            background: #0b0f14;
+
+            border: 1px solid #303944;
+            border-radius: 6px;
+
+            color: #a9b1bc;
+
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .duration-option:hover {
+            border-color: #35d07f;
+            color: #35d07f;
+        }
+
+        .duration-option.active {
+            background: #35d07f;
+            color: #07100b;
+            border-color: #35d07f;
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+            padding: 80px 7%;
+
+            border-top: 1px solid #20262e;
+        }
+
+        .section-heading {
+            text-align: center;
+
+            margin-bottom: 50px;
+        }
+
+        .section-heading h2 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .section-heading p {
+            color: #8f98a5;
+        }
+
+        .feature-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+        .feature-card {
+            background: #121820;
+
+            border: 1px solid #242c35;
+
+            border-radius: 12px;
+
+            padding: 30px;
+
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+
+            border-color: #35d07f;
+        }
+
+        .feature-icon {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #17251e;
+
+            border-radius: 8px;
+
+            color: #35d07f;
+
+            font-size: 20px;
+
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 19px;
+        }
+
+        .feature-card p {
+            color: #8f98a5;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        .how-section {
+            padding: 80px 7%;
+
+            background: #0e1319;
+
+            border-top: 1px solid #20262e;
+        }
+
+        .steps {
+            max-width: 1000px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .step {
+            text-align: center;
+
+            padding: 25px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #35d07f;
+            color: #07100b;
+
+            font-weight: bold;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #8f98a5;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid #20262e;
+
+            padding: 30px 7%;
+
+            text-align: center;
+
+            color: #69727e;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .feature-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .search-row {
+                flex-direction: column;
+            }
+
+            .search-button {
+                padding: 14px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* STOCK CHART */
+        #stock-chart {
+            position: relative;
+            width: 100%;
+            height: 550px;
+            margin-top: 25px;
+            background: #0f1117;
+            border: 1px solid #20262e;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            Stock<span>Scope</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="#">Home</a>
+
+            <a href="#">Analysis</a>
+
+            <a href="#">Compare</a>
+
+            <a href="#">About</a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <h1>
+            Understand the Market.
+            <span>Analyze Smarter.</span>
+        </h1>
+
+        <p>
+            Search for any company and explore its historical
+            stock performance, statistical insights, trends,
+            volatility and more.
+        </p>
+
+
+
+        <!-- SEARCH -->
+
+        <div class="search-container">
+
+            <label>
+                Search Company
+            </label>
+
+            <div class="search-row">
+
+                <input
+                    type="text"
+                    name="company"
+                    class="company"
+                    placeholder="Enter company name or ticker..."
+                >
+
+                <button class="search-button">
+                    Search Company
+                </button>
+
+                <button class="analyze-stock-button">
+                    Analysis Stock
+                </button>
+
+            </div>
+
+            <div id="stock-chart"></div>
+
+            <!-- DURATION -->
+
+            <div class="duration-section">
+
+                <label>
+                    Select Data Duration
+                </label>
+
+                <div class="duration-options">
+
+                    <button type="button" class="duration-option" value="1mo">
+                        1 Month
+                    </button>
+
+                    <button type="button" class="duration-option" value="6mo">
+                        6 Months
+                    </button>
+
+                    <button type="button" class="duration-option active" value="1y">
+                        1 Year
+                    </button>
+
+                    <button type="button" class="duration-option" value="3y">
+                        3 Years
+                    </button>
+
+                    <button type="button" class="duration-option" value="5y">
+                        5 Years
+                    </button>
+
+                    <button type="button" class="duration-option" value="10y">
+                        10 Years
+                    </button>
+
+                    <button type="button" class="duration-option" value="max">
+                        Maximum
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div id="search-results"></div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         FEATURES
+    ========================= -->
+
+    <section class="features">
+
+        <div class="section-heading">
+
+            <h2>
+                What You Can Analyze
+            </h2>
+
+            <p>
+                Turn raw market data into meaningful insights.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ↗
+                </div>
+
+                <h3>
+                    Price Trends
+                </h3>
+
+                <p>
+                    Visualize historical stock prices and
+                    understand how the company has performed
+                    over your selected period.
+                </p>
+
+            </div>
+
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    Σ
+                </div>
+
+                <h3>
+                    Statistical Analysis
+                </h3>
+
+                <p>
+                    Explore mean, median, standard deviation,
+                    variance and other statistical measures.
+                </p>
+
+            </div>
+
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    %
+                </div>
+
+                <h3>
+                    Risk & Volatility
+                </h3>
+
+                <p>
+                    Understand price fluctuations, returns
+                    and the historical volatility of a stock.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================= -->
+
+    <section class="how-section">
+
+        <div class="section-heading">
+
+            <h2>
+                How It Works
+            </h2>
+
+            <p>
+                Analyze a company in three simple steps.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>
+                    Search
+                </h3>
+
+                <p>
+                    Enter the name or ticker symbol of
+                    the company you want to analyze.
+                </p>
+
+            </div>
+
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>
+                    Select Duration
+                </h3>
+
+                <p>
+                    Choose how much historical market data
+                    you want to analyze.
+                </p>
+
+            </div>
+
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>
+                    Analyze
+                </h3>
+
+                <p>
+                    Get charts, statistics, trends and
+                    insights generated from market data.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 StockScope.
+        Stock analysis platform for educational purposes.
+
+    </footer>
+
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <script>
+        const companyInput = document.querySelector(" .company");
+        const analysisButton = document.querySelector(" .search-button");
+        const analyzeStockButton = document.querySelector(" .analyze-stock-button");
+        const durationOptions = document.querySelectorAll(" .duration-option");
+        const searchResults = document.getElementById("search-results");
+
+        let selectedDuration = "1y";
+        let selectedTicker = null;
+
+        durationOptions.forEach(button => {
+            button.addEventListener("click",function(){
+                durationOptions.forEach(btn =>{
+                    btn.classList.remove("active");
+                });
+
+                this.classList.add("active");
+                selectedDuration = this.value;
+
+                console.log("Selected Duration:",selectedDuration);
+            });
+        });
+
+        function findSupportResistance(data){
+            const prices = data.map(day =>({
+                high: Number(day.High),
+                low: Number(day.Low),
+                close: Number(day.Close)
+            }));
+
+            const swingHighs = [];
+            const swingLows = [];
+            const lookback = 5;
+
+            for (let i = lookback; i < prices.length - lookback; i++){
+                const currentHigh = prices[i].high;
+                const currentLow = prices[i].low;
+
+                let isSwingHigh = true;
+                let isSwingLow = true;
+
+                for(let j = 1; j <= lookback; j++){
+                    if(
+                        currentHigh <= prices[i - j].high || currentHigh <= prices[i + j].high
+                    ){isSwingHigh = false;}
+                    if(
+                        currentLow >= prices[i - j].low || currentLow >= prices[i + j].low
+                    ){isSwingLow = false;}
+                }
+                if (isSwingHigh){
+                    swingHighs.push(currentHigh);
+                }
+                if (isSwingLow){
+                    swingLows.push(currentLow);
+                }
+            }
+            return{
+                swingHighs,
+                swingLows
+            };
+        }
+
+        function createZones(levels, tolerancePercent = 1.5) {
+
+            const zones = [];
+
+            levels.sort((a, b) => a - b);
+
+            for (const price of levels) {
+
+                let addedToZone = false;
+
+                for (const zone of zones) {
+
+                    const difference =
+                        Math.abs(price - zone.center) / zone.center * 100;
+
+                    if (difference <= tolerancePercent) {
+
+                        zone.prices.push(price);
+
+                        zone.center =
+                            zone.prices.reduce((sum, p) => sum + p, 0)
+                            / zone.prices.length;
+
+                        zone.low = Math.min(...zone.prices);
+                        zone.high = Math.max(...zone.prices);
+
+                        addedToZone = true;
+                        break;
+                    }
+                }
+
+                if (!addedToZone) {
+
+                    zones.push({
+                        center: price,
+                        low: price,
+                        high: price,
+                        prices: [price]
+                    });
+                }
+            }
+
+            return zones;
+        }
+
+        function drawZones(chartContainer, chart, candleSeries, supportZones, resistanceZones) {
+
+            function updateZones() {
+
+                const oldZones = chartContainer.querySelectorAll(".price-zone");
+                oldZones.forEach(zone => zone.remove());
+
+
+                function drawZone(zone, type) {
+
+                    const top = candleSeries.priceToCoordinate(zone.high);
+                    const bottom = candleSeries.priceToCoordinate(zone.low);
+
+                    if (top === null || bottom === null) {
+                        return;
+                    }
+
+                    const zoneElement = document.createElement("div");
+
+                    zoneElement.classList.add("price-zone");
+
+                    zoneElement.style.position = "absolute";
+                    zoneElement.style.left = "0";
+                    zoneElement.style.right = "0";
+
+                    zoneElement.style.top =
+                        `${Math.min(top, bottom)}px`;
+
+                    zoneElement.style.height =
+                        `${Math.abs(bottom - top)}px`;
+
+                    zoneElement.style.pointerEvents = "none";
+                    zoneElement.style.zIndex = "10";
+
+
+                    if (type === "support") {
+
+                        zoneElement.style.background =
+                            "rgba(38, 166, 154, 0.15)";
+
+                        zoneElement.style.borderTop =
+                            "1px solid rgba(38, 166, 154, 0.5)";
+
+                        zoneElement.style.borderBottom =
+                            "1px solid rgba(38, 166, 154, 0.5)";
+
+                    } else {
+
+                        zoneElement.style.background =
+                            "rgba(239, 83, 80, 0.15)";
+
+                        zoneElement.style.borderTop =
+                            "1px solid rgba(239, 83, 80, 0.5)";
+
+                        zoneElement.style.borderBottom =
+                            "1px solid rgba(239, 83, 80, 0.5)";
+                    }
+
+                    const label = document.createElement("div");
+
+                    label.style.position = "absolute";
+                    label.style.right = "10px";
+                    label.style.top = "50%";
+                    label.style.transform = "translateY(-50%)";
+
+                    label.style.fontSize = "12px";
+                    label.style.fontWeight = "600";
+                    label.style.padding = "5px 8px";
+                    label.style.borderRadius = "5px";
+
+                    label.style.background = type === "support"
+                        ? "rgba(38, 166, 154, 0.85)"
+                        : "rgba(239, 83, 80, 0.85)";
+
+                    label.style.color = "#ffffff";
+
+                    const typeText =
+                        type === "support" ? "Support" : "Resistance";
+
+                    label.textContent =
+                        `${typeText} ₹${zone.low.toFixed(2)} – ₹${zone.high.toFixed(2)}`;
+
+                    zoneElement.appendChild(label);
+
+                    chartContainer.appendChild(zoneElement);
+                }
+
+
+                supportZones.forEach(zone => {
+                    drawZone(zone, "support");
+                });
+
+                resistanceZones.forEach(zone => {
+                    drawZone(zone, "resistance");
+                });
+            }
+
+
+            // Draw zones initially
+            updateZones();
+
+
+            // Update zones whenever the price scale changes
+            chart.timeScale().subscribeVisibleLogicalRangeChange(updateZones);
+
+        }
+
+        async function fetchStockData(){
+            if(!selectedTicker){
+                alert("Please select a company first.")
+                return;
+            }
+
+            try{
+                const response = await fetch(
+                    `/api/stock-data/?ticker=${encodeURIComponent(selectedTicker)}&period=${selectedDuration}`
+                );
+                const data = await response.json();
+
+                console.log("Stock Data:", data);
+
+            /***************CANDLE SERIES CHART*****************/
+                const chartContainer = document.getElementById("stock-chart");
+                const chart = LightweightCharts.createChart(chartContainer,{
+                        layout: {
+                            background: {
+                                type: "solid",
+                                color: "#0f1117"
+                            },
+                            textColor: "#d1d5db"
+                        },
+
+                        grid: {
+                            vertLines: {
+                                color: "#1f2937"
+                            },
+                            horzLines: {
+                                color: "#1f2937"
+                            }
+                        },
+
+                        rightPriceScale: {
+                            borderColor: "#374151"
+                        },
+
+                        timeScale: {
+                            borderColor: "#374151",
+                            timeVisible: true
+                        }
+                });
+
+                const candleSeries = chart.addSeries(
+                    LightweightCharts.CandlestickSeries,
+                    {
+                        upColor: "#26a69a",
+                        downColor: "#ef5350",
+                        borderVisible: false,
+                        wickUpColor: "#26a69a",
+                        wickDownColor: "#ef5350"
+                    }
+                );
+
+                const candleData = data.data.filter(day =>
+                    day.Open != null &&
+                    day.High != null &&
+                    day.Low != null &&
+                    day.Close != null
+                ).map(day =>
+                    ({
+                        time: day.Date.split("T")[0],
+                        open: Number(day.Open),
+                        high: Number(day.High),
+                        low: Number(day.Low),
+                        close: Number(day.Close)
+                    })
+                );
+
+                candleSeries.setData(candleData);
+
+                const levels = findSupportResistance(data.data);
+                console.log("Swing Highs:", levels.swingHighs);
+                console.log("Swing Lows:",levels.swingLows);
+
+                const resistanceZones = createZones(levels.swingHighs);
+                const supportZones = createZones(levels.swingLows);
+
+                console.log("Resistance Zones:", resistanceZones);
+                console.log("Support Zone:", supportZones);
+
+            /**********VOLUME SERIES***************/
+            const volumeSeries = chart.addSeries(
+                LightweightCharts.HistogramSeries,
+                {
+                    priceFormat: {
+                        type: "volume"
+                    },
+                    priceScaleId: ""
+                }
+            );
+            volumeSeries.priceScale().applyOptions({
+                scaleMargins: {
+                    top: 0.7,
+                    bottom: 0
+                }
+            });
+
+            const volumeData = data.data.filter(day =>
+                day.Volume != null
+            ).map(day =>
+                ({
+                    time: day.Date.split("T")[0],
+                    value: Number(day.Volume),
+                    color: Number(day.Close) >= Number(day.Open)?"#26a69a":"#ef5350"
+                })
+            );
+
+            volumeSeries.setData(volumeData);
+            /*AUTO FIT THE CHART*/    
+            chart.timeScale().fitContent();
+
+            /* DRAW SUPPORT & RESISTANCE ZONES */
+                drawZones(
+                    chartContainer,
+                    chart,
+                    candleSeries,
+                    supportZones,
+                    resistanceZones
+                );
+
+            }
+            catch(error){
+                console.error("Error fetching stock data:", error);
+            }
+
+        }
+        analyzeStockButton.addEventListener("click", function(){
+            fetchStockData();
+        });
+
+        analysisButton.addEventListener("click",async function () {
+            
+            const company = companyInput.value.trim();
+
+            if(!company){
+                alert("Please enter a compnay name");
+                return;
+            }
+            try{
+                const response = await fetch(
+                    `api/search/?q=${encodeURIComponent(company)}`
+                );
+
+                const data = await response.json();
+                
+                searchResults.innerHTML = "";
+                data.results.forEach(company => {
+                    const result = document.createElement("div");
+
+                    result.innerHTML = `
+                    <strong>${company.name}</strong>
+                    <br>
+                    <small>${company.symbol} - ${company.exchange}</small>
+                    
+                    <button type="button" class="select-company">Select</button>`;
+
+                    const selectButton = result.querySelector(" .select-company");
+
+                    selectButton.addEventListener("click", function(){
+                        selectedTicker = company.symbol;
+
+                        console.log("Selected Company:", company.name);
+                        console.log("Selected Ticker:", selectedTicker);
+                    });
+
+                    searchResults.appendChild(result);
+                });
+            }
+            catch(error){
+                console.error("Error:", error);
+            }
+        });
+
+    </script>
+
+</body>
+</html>
