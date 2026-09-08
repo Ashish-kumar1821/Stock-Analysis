@@ -81,3 +81,14 @@ def calculate_returns(data):
         "average_daily_return":float(average_daily_return),
         "annualized_return":float(annualized_return),
     }
+
+def calculate_volatility(data):
+
+    daily_volatility = data["daily_return"].std()
+
+    annualized_volatility = daily_volatility * (252**0.5)
+
+    return{
+        "daily_volatility":float(daily_volatility),
+        "annualized_volatility":float(annualized_volatility),
+    }

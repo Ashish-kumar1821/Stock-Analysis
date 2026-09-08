@@ -1,7 +1,14 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
-from .service import search_company,get_stock_data,calculate_basic_statistics,calculate_moving_average
+from .service import (
+    search_company,
+    get_stock_data,
+    calculate_basic_statistics,
+    calculate_moving_average,
+    calculate_returns,
+    calculate_volatility,
+    )
 
 # Create your views here.
 def home(request):
@@ -38,12 +45,18 @@ def stock_data(request):
 
         data = calculate_moving_average(data)
 
+        returns = calculate_returns(data)
+
+        volatility = calculate_volatility(data)
+
         statistics = calculate_basic_statistics(data)
 
         return JsonResponse({
             "ticker" : ticker,
             "period" : period,
             "statistics" : statistics,
+            "returns" : returns,
+            "volatility" : volatility, 
             "data" : data.reset_index().to_dict(orient="records")
         })
     except Exception as e:
