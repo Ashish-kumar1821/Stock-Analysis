@@ -54,5 +54,30 @@ def calculate_basic_statistics(data):
         "highest_price":float(highest_price),
         "lowest_price":float(lowest_price),
         "total_return":float(total_return),
-        "average_daily_return":float(average_daily_return)
+        "average_daily_return":float(average_daily_return),
+    }
+
+def calculate_moving_average(data):
+    data["SMA_20"] = data["Close"].rolling(window=20).mean()
+    data["SMA_50"] = data["Close"].rolling(window=50).mean()
+    data["SMA_200"] = data["Close"].rolling(window=200).mean()
+
+    return data
+
+def calculate_returns(data):
+
+    data["daily_return"] = (data["Close"].pct_change() * 100)
+
+    cumulative_return = (data["Close"].iloc[-1] - data["Close"].iloc[0])/(data["Close"].iloc[0])*100
+
+    average_daily_return = data["daily_return"].mean()
+
+    annualized_return = (
+        ((data["Close"].iloc[-1]/data["Close"].iloc[0])**(252/len(data)) - 1)*100
+    )
+
+    return{
+        "cumulative_return":float(cumulative_return),
+        "average_daily_return":float(average_daily_return),
+        "annualized_return":float(annualized_return),
     }

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
-from .service import search_company,get_stock_data,calculate_basic_statistics
+from .service import search_company,get_stock_data,calculate_basic_statistics,calculate_moving_average
 
 # Create your views here.
 def home(request):
@@ -35,6 +35,8 @@ def stock_data(request):
 
     try:
         data = get_stock_data(ticker,period)
+
+        data = calculate_moving_average(data)
 
         statistics = calculate_basic_statistics(data)
 
